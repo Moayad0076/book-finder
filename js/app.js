@@ -1,3 +1,4 @@
+import { fetchBooks } from "./api.js";
 const form = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search");
 const results = document.querySelector("#results");
@@ -11,10 +12,7 @@ async function searchBooks(query) {
   results.innerHTML = "";
 
   try {
-    const response = await fetch(
-      `https://openlibrary.org/search.json?q=${query}&limit=12`,
-    );
-    const data = await response.json();
+    const data = await fetchBooks(query);
 
     if (data.docs.length === 0) {
       statusText.textContent = "لا توجد نتائج";
